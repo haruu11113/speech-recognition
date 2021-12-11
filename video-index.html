@@ -6,10 +6,6 @@
 </head>
 <body>
 <h1>リアルタイム音声文字起こし</h1>
-<div>
-    <a href="./video-index.html">go to: video speech recognition</a>
-</div>
-
 <button id="button" onclick="toggleStartStop()" stype="width: 30px; height: 30px;"></button>
 <a>認識中の言語:</a><a id='lang'></a>
 <select name="select-lang" id="select-lang">
@@ -17,10 +13,37 @@
     <option value="en-US">English</option>
 </select>
 <button id="restart" onclick="restart()" stype="width: 30px; height: 30px;">Set Language</button>
-<div style="border:1px solid black; padding:10px">
-    <textarea id="final_span" style="width: 100%; height: 250px; border: None"></textarea>
-    <span id="interim_span" style="color:grey"></span>
+
+<div class="sample-box">
+    <video id="player" controls playsinline muted autoplay style="width: 100%;"></video>
+    <div class="good">
+        <span id="interim_span" style="color:black" aria-hidden="true"></span>
+    </div>
 </div>
+<style>
+.sample-box {
+    position: relative;
+}
+
+.good {
+    width: 100%;
+    <!-- height: 100%; -->
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: black;
+}
+</style>
+<!-- <div style="border:1px solid black; padding:10px"> -->
+    <textarea id="final_span" style="width: 100%; height: 250px; border: None"></textarea>
+    <!-- <span id="interim_span" style="color:grey"></span> -->
+<!-- </div> -->
 <script type="text/javascript">
     const button = document.getElementById('button');
     const selectlang = document.getElementById('select-lang');
@@ -91,6 +114,18 @@
         reset();
         start();
     }
+</script>
+<script>
+  const player = document.getElementById('player');
+
+  const constraints = {
+    video: true,
+  };
+
+  navigator.mediaDevices.getUserMedia(constraints)
+    .then((stream) => {
+      player.srcObject = stream;
+    });
 </script>
 <body>
 <html>
