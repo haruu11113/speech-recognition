@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Posenet</title>
+    <meta charset="UTF-8">
+    <style>
+    <!--     .container { -->
+    <!--         display: grid; -->
+    <!--     } -->
+
+    <!--     .top { -->
+    <!--         left: 0; -->
+    <!--         bottom: 0; -->
+    <!--         width: 100%; -->
+    <!--     } -->
+
+    <!--     .footer { -->
+    <!--         left: 0; -->
+    <!--         bottom: 0; -->
+    <!--         width: 100%; -->
+    <!--         color: black; -->
+    <!--     } -->
+
+    <!--     .footer-text { -->
+    <!--         max-width: 600px; -->
+    <!--         text-align: left; -->
+    <!--         margin: auto; -->
+    <!--         font-family: 'Noto Sans JP', sans-serif; -->
+    <!--     } -->
+    <!--     ul, ol { -->
+    <!--         background: #fffcf4; -->
+    <!--         border-radius :8px; -->
+    <!--         box-shadow :0px 0px 5px silver;/*5px=影の広がり具合*/ -->
+    <!--         padding: 0.5em 0.5em 0.5em 2em; -->
+    <!--     } -->
+    <!--     ul li, ol li { -->
+    <!--         line-height: 1.5; -->
+    <!--         padding: 0.5em 0; -->
+    <!--     } -->
+
+    <!--     @media only screen and (max-width: 600px) { -->
+
+    <!--         .footer-text, -->
+    <!--         .dg { -->
+    <!--             display: none; -->
+    <!--         } -->
+    <!--     } -->
+
+        /*
+         *  The following loading spinner CSS is from SpinKit project
+         *  https://github.com/tobiasahlin/SpinKit
+         */
+        .sk-spinner-pulse {
+            width: 20px;
+            height: 20px;
+            margin: auto 10px;
+            float: left;
+            background-color: #333;
+            border-radius: 100%;
+            -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;
+            animation: sk-pulseScaleOut 1s infinite ease-in-out;
+        }
+
+        @-webkit-keyframes sk-pulseScaleOut {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            100% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sk-pulseScaleOut {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            100% {
+                -webkit-transform: scale(1.0);
+                transform: scale(1.0);
+                opacity: 0;
+            }
+        }
+
+        .spinner-text {
+            float: left;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <script src="https://unpkg.com/@tensorflow-models/posenet"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r16/Stats.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.1/dat.gui.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="flag_sem_util.js"></script>
+</head>
+
+<body>
+    <div class="top">
+        <div id="info" style='display:none'>
+        </div>
+        <div id="loading" style='display:flex'>
+            <div class="spinner-text">
+                Loading PoseNet model...
+            </div>
+            <div class="sk-spinner sk-spinner-pulse"></div>
+        </div>
+        <div id='main' style='display:none'>
+            <video id="video" playsinline style="display: none;">
+            </video>
+            <canvas id="output" />
+        </div>
+    </div>
+    <script src="posenet_flag_sem.js"></script>
+</body>
+
+</html>
