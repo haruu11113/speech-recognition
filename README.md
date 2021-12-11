@@ -8,3 +8,4 @@ loaclhost:8080
 
 ## ref
 - []https://qiita.com/mktshhr/items/ac6351dd056e571715e0
+- []http://localhost:8080/yoro-index.html
