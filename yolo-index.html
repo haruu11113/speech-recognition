@@ -29,14 +29,16 @@ let status;
 let objects = [];
 
 function setup() {
+    var h = 320 * 3;
+    var w = 240 * 3;
     // ドキュメント内にcanvas要素を作成し、サイズをピクセル単位で設定する。
     // https://p5js.org/reference/#/p5/createCanvas
-    createCanvas(320, 240);
+    createCanvas(h, w);
     // Webカメラからのオーディオ/ビデオを含む新しいHTML5 video要素を作成する
     // https://p5js.org/reference/#/p5/createCapture
     video = createCapture(VIDEO);
     // ビデオのサイズはキャンバスと同じ
-    video.size(320, 240);
+    video.size(h, w);
 
     // YOLOオブジェクトを作成する
     yolo = ml5.YOLO(video, startDetecting);
