@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PoseNet - Camera Feed Demo</title>
+    <meta lang="ja-JP">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div style="width: 100%;">
+        <h3>OR</h3>
+        <textarea style="width: 100%;" id="or-area"></textarea>
+    </div>
+    <div style="width: 100%;">
+        <h3>AND</h3>
+        <textarea style="width: 100%;" id="and-area"></textarea>
+    </div>
+    <div>
+        <a id="result" href="https://mobile.twitter.com/search?q=aa&src=typed_query&f=live">
+            https://mobile.twitter.com/search?q=aa&src=typed_query&f=live
+        </a>
+    </div>
+    <script>
+        // ---Ivent Lister Def----
+        window.addEventListener('DOMContentLoaded', function(){
+            var or_area = document.getElementById("or-area");
+            or_area.addEventListener("change",function(){
+                makeUrl();
+            });
+            or_area.addEventListener("input",function(){
+                makeUrl();
+            });
+        });
+        window.addEventListener('DOMContentLoaded', function(){
+            var and_area = document.getElementById("and-area");
+            and_area.addEventListener("change",function(){
+                makeUrl();
+            });
+            and_area.addEventListener("input",function(){
+                makeUrl();
+            });
+        });
+        // ---/Ivent Lister Def----
+
+        function makeUrl() {
+            var or_area = document.getElementById("or-area");
+            var and_area = document.getElementById("and-area");
+            var el_result = document.getElementById("result");
+
+            var or = or_area.value.split("\n");
+            var and = and_area.value.split("\n");
+            var or_query = "";
+            for( var i=0 ; i < or.length ; i++ ) {
+                if( !(i == or.length-1 && or[i].length == 0) ) {
+                    if(i==0){
+                        or_query = or_query + "OR%20" + or[i];
+                    } else {
+                        or_query = or_query + "%20OR%20" + or[i];
+                    }
+                }
+            }
+            var and_query = "";
+            for( var i=0 ; i < and.length ; i++ ) {
+                if( !(i == and.length-1 && and[i].length == 0) ) {
+                    if(i==0){
+                        and_query = and_query + "AND%20" + and[i];
+                    } else {
+                        and_query = and_query + "%20AND%20" + and[i];
+                    }
+                }
+            }
+            var query = or_query + "%20" + and_query;
+            var url = `https://mobile.twitter.com/search?q=${query}&src=typed_query&f=live`;
+            url = url.replace('%20%20', '').replace('%20&', '');
+            el_result.href = url;
+            el_result.textContent = url;
+        }
+    </script>
+</body>
+</html>
